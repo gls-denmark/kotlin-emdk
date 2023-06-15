@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><!--This is an auto generated document. Changes to this document may cause incorrect behavior.--><wap-provisioningdoc>
+  <characteristic type="ProfileInfo">
+    <parm name="created_wizard_version" value="11.0.2"/>
+  </characteristic>
+  <characteristic type="Profile">
+    <parm name="ProfileName" value="dk.gls.kotlin_emdk"/>
+    <parm name="ModifiedDate" value="2023-06-09 11:28:22"/>
+    <parm name="TargetSystemVersion" value="11.4"/>
+    <characteristic type="AccessMgr" version="11.3">
+      <parm name="CallerPackageName" value="dk.gls.kotlin_emdk"/>
+      <parm name="OperationMode" value="1"/>
+      <parm name="ServiceAccessAction" value="4"/>
+      <parm name="ServiceIdentifier" value="content://oem_info/oem.zebra.secure/build_serial"/>
+      <parm name="CallerSignature" value="MIIClDCCAXwCAQEwDQYJKoZIhvcNAQELBQAwEDEOMAwGA1UEAwwFRXNiZW4wHhcNMjMwNjA5MTAyMzI1WhcNNDgwNjAyMTAyMzI1WjAQMQ4wDAYDVQQDDAVFc2JlbjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN4HZb3ibXPago13K208sQuhJSoYUB5cyzjYuH5cQ9eVeETz/9tj3GgAga0L3V3di+mFMG+Qp0NuqtpRvmWGty/xZ4RqLhayi6HhSN78oCVld+7xCO4rR+paEC1bpCFK1D2qqVQojd9UK9dsj+WGgO8UUwMdL9l0kuRZwaVwBpybISqXTnO0kKDJlBZobE2ZvyXp9FOwpWdkS/v4x9bB7mSNpVIOn0DMhsOWJZ2G7fMzKqyEVABBh+qtHOFqydc2jBgfeV6BCd1pDDCGlAJiXvaiTFJf23zvAHtXUryRA1Jt+RG+f+Qrq5Z59JUtsBFgm2G3GiUiJ7NSV3/RUi5t9s8CAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAIXK6gaUos8y1/srNIaAmoDZ6WaRpeOnQHAn7Vw0TsBdtcQanUZCi1aLPQF8/e/tQymAia0ek61Le0v+ATf78LW5KKH71KlndkKpHj6S2iQdo2BFTJeO3yPCL/PweFmQxydcz3MiQIct+qLPcrAHW0TmjIYiTckqzpowhOVOtJDeHHru85XoVe/iNswjtujvfpbMD0ReDRT/b/wOv1Aj4mwpF+b2XQ0/UpAMU9ZCCxyEYvu6SObp/aboziX+u7UXLTq5SnLvZzU/SWAjJx+CHF3zWx0dnnk3bmQe1XXddV66fo+XTRmGLVprtSKHnxC3cETx8HlOld6KoP7OIKLlzSg==" />
+    </characteristic>
+  </characteristic>
+</wap-provisioningdoc>
