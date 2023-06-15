@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,16 +38,34 @@ class MainActivity : ComponentActivity() {
 fun DisplayDeviceSerial(modifier: Modifier = Modifier) {
     val viewModel: EMDKViewModel = viewModel()
 
-    val test = viewModel.deviceSerialFlow.collectAsStateWithLifecycle()
+    val serialResult = viewModel.deviceSerialStateFlow.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
 
-    viewModel.getDeviceSerial(context)
+    if (serialResult.value is UIState.Init) {
+        LaunchedEffect(Unit) {
+            viewModel.getDeviceSerial(context)
+        }
+    }
 
     Text(
-        text = "Get Device Serial Result:  ${test.value}!",
+        text = getText(serialResult.value),
         modifier = modifier
     )
+}
+
+private fun getText(value: UIState): String{
+    return when(value){
+        is UIState.Error -> {
+            "An Error occurred when getting device serial:\n${(value as UIState.Error).errorMessage}!"
+        }
+        is UIState.Success -> {
+            "Device Serial:\n${(value as UIState.Success).serialValue}!"
+        }
+        is UIState.Init -> {
+            "Getting Device Serial"
+        }
+    }
 }
 
 @Preview(showBackground = true)

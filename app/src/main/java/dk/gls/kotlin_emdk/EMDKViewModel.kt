@@ -7,14 +7,21 @@ import dk.gls.kemdk.DeviceSerialUtil
 import dk.gls.kemdk.EMDKResult
 import dk.gls.kemdk.EMDKThrowable
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class EMDKViewModel() : ViewModel() {
 
-    private val _deviceSerialFlow = MutableStateFlow("init")
-    val deviceSerialFlow = _deviceSerialFlow.asStateFlow()
+    private val _deviceResultStateFlow: MutableStateFlow<UIState> = MutableStateFlow(UIState.Init)
+    val deviceSerialStateFlow = _deviceResultStateFlow.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        UIState.Init
+    )
 
     fun getDeviceSerial(context: Context) {
         viewModelScope.launch {
@@ -25,39 +32,35 @@ class EMDKViewModel() : ViewModel() {
                     when (result.error) {
                         is EMDKThrowable.ProfileLoadThrowable -> {
                             val error = result.error as EMDKThrowable.ProfileLoadThrowable
-                            _deviceSerialFlow.update {
-                                "${error.throwable.message}"
-                            }
+                            _deviceResultStateFlow.update { UIState.Error(error.throwable.message) }
                         }
 
                         is EMDKThrowable.ProfileXMLThrowable -> {
                             val error = result.error as EMDKThrowable.ProfileXMLThrowable
-                            _deviceSerialFlow.update {
-                                "${error.emdkResult?.extendedStatusMessage}"
-                            }
+                            _deviceResultStateFlow.update { UIState.Error(error.emdkResult?.extendedStatusMessage) }
                         }
 
                         is EMDKThrowable.UnableToRetrieveSerial -> {
                             val error = result.error as EMDKThrowable.UnableToRetrieveSerial
-                            _deviceSerialFlow.update {
-                                "${error.serialResult}"
-                            }
+                            _deviceResultStateFlow.update { UIState.Error(error.serialResult) }
                         }
 
                         else -> {
-                            _deviceSerialFlow.update {
-                                result.error.message ?: "Something went wrong"
-                            }
+                            _deviceResultStateFlow.update { UIState.Error("Something went wrong") }
                         }
                     }
                 }
 
                 is EMDKResult.Success -> {
-                    _deviceSerialFlow.update { result.value }
+                    _deviceResultStateFlow.update { UIState.Success(result.value) }
                 }
             }
         }
     }
+}
 
-
+sealed interface UIState {
+    object Init : UIState
+    class Success(val serialValue: String) : UIState
+    class Error(val errorMessage: String?) : UIState
 }
