@@ -8,6 +8,6 @@ sealed class EMDKResult<out Value, out Failure> {
 }
 
 
-fun <T> T.toGLSSuccess(): EMDKResult.Success<T> = EMDKResult.Success(this)
+fun <T> T.toKEMDKSuccess(): EMDKResult.Success<T> = EMDKResult.Success(this)
 
-fun <Error> Error.toGLSFailure() = EMDKResult.Failure(this)
+fun <Error> Error.toKEMDKFailure() = EMDKResult.Failure(this)

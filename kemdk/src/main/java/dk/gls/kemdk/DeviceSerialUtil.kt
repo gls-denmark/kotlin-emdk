@@ -18,7 +18,7 @@ class DeviceSerialUtil(val context: Context) {
             val deviceSerial = retrieveDeviceSerial()
             Log.d("kemdk", "retrieveDeviceSerial: $deviceSerial")
             if (deviceSerial != null && !deviceSerial.contains("Error")) {
-                continuation.resume(deviceSerial.toGLSSuccess())
+                continuation.resume(deviceSerial.toKEMDKSuccess())
             } else {
                 val emdkManagerResults: EMDKResults = EMDKManager.getEMDKManager(
                     context,
@@ -34,7 +34,7 @@ class DeviceSerialUtil(val context: Context) {
                                 continuation.resume(
                                     EMDKThrowable.ProfileLoadThrowable(
                                         RuntimeException("EMDKManager was null")
-                                    ).toGLSFailure()
+                                    ).toKEMDKFailure()
                                 )
                                 return
                             }
@@ -58,7 +58,7 @@ class DeviceSerialUtil(val context: Context) {
                                     continuation.resume(
                                         EMDKThrowable.ProfileLoadThrowable(
                                             RuntimeException("Failed to initiate request to apply the profiles")
-                                        ).toGLSFailure()
+                                        ).toKEMDKFailure()
                                     )
                                 }
                             }
@@ -81,12 +81,12 @@ class DeviceSerialUtil(val context: Context) {
                                 Log.d("kemdk", "onData: retrieveDeviceSerial: $deviceSerial")
                                 if (continuation.isActive) {
                                     if (deviceSerial != null && !deviceSerial.contains("Error")) {
-                                        continuation.resume(deviceSerial.toGLSSuccess())
+                                        continuation.resume(deviceSerial.toKEMDKSuccess())
                                     } else {
                                         continuation.resume(
                                             EMDKThrowable.UnableToRetrieveSerial(
                                                 deviceSerial
-                                            ).toGLSFailure()
+                                            ).toKEMDKFailure()
                                         )
                                     }
                                 }
@@ -98,7 +98,7 @@ class DeviceSerialUtil(val context: Context) {
                                 )
                                 if (continuation.isActive) {
                                     continuation.resume(
-                                        EMDKThrowable.ProfileXMLThrowable(result).toGLSFailure()
+                                        EMDKThrowable.ProfileXMLThrowable(result).toKEMDKFailure()
                                     )
                                 }
                             }
