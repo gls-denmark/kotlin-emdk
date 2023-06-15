@@ -9,6 +9,13 @@ import com.symbol.emdk.ProfileManager
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
+/**
+ * A class for retrieving the device serial
+ * Uses the EMDK android library developed by Zebra
+ * More information can be found here:
+ * https://www.zebra.com/us/en/software/mobile-computer-software/emdk-for-android.html
+ * @param context is used for getting the EMDKManager and contentResolver used to get Device Serial
+ */
 class DeviceSerialUtil(val context: Context) {
 
     /** Uses the EMDKManager to configure the device and enable retrieval of Device Serial. **/
