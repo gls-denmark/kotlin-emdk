@@ -121,40 +121,34 @@ YWR2ZW50dXJlZmF0aGVycm9vdHBhc3R0cmFjZWVhY2hydWJiZXJoYWRldmVudGNoZWNrdGVhY2hlcmV4
 
 ## Typical errors
 - **statusCode error: FAILURE Profile name not found in current config.**
-```
-This is due to wrong EMDKConfig
-Make sure ProfileName and CallerPackageName both matches your package name.
-Some buildtypes, e.g. debug, often postfixes with .debug.
-Unittests postfixes with .test in addition so for tests, the config should have a your.package.name.debug.test
-You can find packagename via context.packageName
-```
+
+    This is due to wrong EMDKConfig
+    Make sure ProfileName and CallerPackageName both matches your package name.
+    Some buildtypes, e.g. debug, often postfixes with .debug.
+    Unittests postfixes with .test in addition so for tests, the config should have a your.package.name.debug.test
+    You can find packagename via context.packageName
 
 - **Error: This app does not have access to call OEM service.**
-```
-There are several cases where this error can occur, see below
-```
+
+    There are several cases where this error can occur, see below
+  
   - *statusCode CHECK_XML*
-  ```
-  Due to CallerSignature not matching signature of app.
-  To get signature of app, you can use Zebras own Sigtools.jar and convert the result to base64
-  instructions found here: https://techdocs.zebra.com/emdk-for-android/latest/samples/sigtools/
-  ```
+  
+    Due to CallerSignature not matching signature of app.
+    To get signature of app, you can use Zebras own Sigtools.jar and convert the result to base64 instructions found here: https://techdocs.zebra.com/emdk-for-android/latest/samples/sigtools/
 
   - *Failed to find provider info for oem_info*
-  ```
-  Missing queries in manifest - See setup for details
-  ```
+  
+    Missing queries in manifest - See setup for details
+  
   - *other cause*
-  ```
-  Missing permission <uses-permission android:name="com.symbol.emdk.permission.EMDK" /> in manifest
-  ``` 
+  
+    Missing permission <uses-permission android:name="com.symbol.emdk.permission.EMDK" /> in manifest
 
 - **java.lang.SecurityException: Permission Denial: opening provider com.zebra.dataprovider.provider.DataLakeProvider**
-```
-Missing permission <uses-permission android:name="com.zebra.provider.READ"/> in manifest
-```
+
+    Missing permission <uses-permission android:name="com.zebra.provider.READ"/> in manifest
 
 - **java.lang.NoClassDefFoundError: Failed resolution of: Lcom/symbol/emdk/EMDKManager$EMDKListener;**
-```
-Missing use lib in manifest - See setup for details
-```
+
+    Missing use lib in manifest - See setup for details
