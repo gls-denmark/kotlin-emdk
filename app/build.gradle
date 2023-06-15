@@ -73,6 +73,8 @@ dependencies {
     compileOnly "com.symbol:emdk:$emdk_version"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.1"
+
 
 
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')

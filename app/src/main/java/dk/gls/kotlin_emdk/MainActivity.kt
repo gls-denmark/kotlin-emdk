@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dk.gls.kotlin_emdk.ui.theme.KotlinemdkTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -37,7 +38,7 @@ class MainActivity : ComponentActivity() {
 fun DisplayDeviceSerial(modifier: Modifier = Modifier) {
     val viewModel: EMDKViewModel = viewModel()
 
-    val test = viewModel.deviceSerialFlow.collectAsState()
+    val test = viewModel.deviceSerialFlow.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
 
