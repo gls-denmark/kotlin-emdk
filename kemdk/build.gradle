@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+}
+
+
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+
+version = "0.0.1"
+
+android {
+    namespace 'dk.gls.kemdk'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 30
+        targetSdk 33
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    //Scanner
+    def emdk_version = "9.1.1"
+    compileOnly "com.symbol:emdk:$emdk_version"
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+}
+
+apply {
+    from("publish.gradle")
+}
