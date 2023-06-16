@@ -13,18 +13,17 @@ You need to add the com.android.library plugin
 
 #### settings.gradle
 The library requires you to have the EMDK-Android in your app, so you need to add the following repository
-    - maven ("https://zebratech.jfrog.io/artifactory/EMDK-Android/")
+- maven ("https://zebratech.jfrog.io/artifactory/EMDK-Android/")
+To get the kemdk library you also need to add a reference to jitpak:
+- maven ("https://jitpack.io")
 
 #### app build.gradle
 In the dependencies of your app you need to reference the implementation of the kemdk library
 ```
 /* EMDK */
-val emdkVersion = "0.0.1"
-implementation("dk.gls:kemdk:$emdkVersion")
+val emdkVersion = "1.0.0"
+implementation("com.github.gls-denmark:kotlin-emdk:$emdkVersion")
 ```
-
-//TODO add setup of jitpack repository to actually download the lib
-
 
 #### AndroidManifest.xml
 For the library to work the following permissions and queries block needs to be added to your manifest:

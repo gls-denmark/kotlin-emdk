@@ -65,7 +65,8 @@ dependencies {
     Once build and published, we can test the uploaded library by referring to the repository instead
      */
 
-//    implementation 'dk.gls:kemdk:0.0.1'
+//    def emdk_version = "1.0.0"
+//    implementation "com.github.gls-denmark:kotlin-emdk:$emdk_version"
     implementation project(':kemdk')
 
     //Scanner
