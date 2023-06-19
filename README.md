@@ -21,7 +21,7 @@ To get the kemdk library you also need to add a reference to jitpak:
 In the dependencies of your app you need to reference the implementation of the kemdk library
 ```
 /* EMDK */
-val emdkVersion = "1.0.0"
+val emdkVersion = "1.0.1"
 implementation("com.github.gls-denmark:kotlin-emdk:$emdkVersion")
 ```
 
