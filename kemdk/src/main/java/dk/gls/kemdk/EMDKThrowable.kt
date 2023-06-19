@@ -13,7 +13,7 @@ sealed class EMDKThrowable : Throwable() {
      * ProfileXMLThrowable is related to errors in the EDMKConfig.xml
      * See Readme for troubleshooting
      */
-    class ProfileXMLThrowable(val emdkResult: EMDKResults?) : EMDKThrowable()
+    class ProfileXMLThrowable(val emdkConfigError: EMDKConfigError?) : EMDKThrowable()
 
     /**
      * UnableToRetrieveSerial happens when there is an error retrieving the device serial
@@ -21,4 +21,16 @@ sealed class EMDKThrowable : Throwable() {
      * See Readme for troubleshooting
      */
     class UnableToRetrieveSerial(val serialResult: String?) : EMDKThrowable()
+}
+
+data class EMDKConfigError(
+    val configError: String,
+    val extendedConfigError: String
+)
+
+fun EMDKResults.toConfigError(): EMDKConfigError {
+    return EMDKConfigError(
+        configError = statusString,
+        extendedConfigError = extendedStatusMessage
+    )
 }

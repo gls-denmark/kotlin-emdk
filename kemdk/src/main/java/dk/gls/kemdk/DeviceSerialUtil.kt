@@ -105,7 +105,8 @@ class DeviceSerialUtil(val context: Context) {
                                 )
                                 if (continuation.isActive) {
                                     continuation.resume(
-                                        EMDKThrowable.ProfileXMLThrowable(result).toKEMDKFailure()
+                                        EMDKThrowable.ProfileXMLThrowable(result?.toConfigError())
+                                            .toKEMDKFailure()
                                     )
                                 }
                             }

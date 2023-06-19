@@ -65,13 +65,9 @@ dependencies {
     Once build and published, we can test the uploaded library by referring to the repository instead
      */
 
-//    def emdk_version = "1.0.0"
+//    def emdk_version = "1.0.1"
 //    implementation "com.github.gls-denmark:kotlin-emdk:$emdk_version"
     implementation project(':kemdk')
-
-    //Scanner
-    def emdk_version = "9.1.1"
-    compileOnly "com.symbol:emdk:$emdk_version"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
     implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.1"
