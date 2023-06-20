@@ -132,7 +132,13 @@ YWR2ZW50dXJlZmF0aGVycm9vdHBhc3R0cmFjZWVhY2hydWJiZXJoYWRldmVudGNoZWNrdGVhY2hlcmV4
     There are several cases where this error can occur, see below
   
   - *statusCode CHECK_XML*
-  
+
+    Either:
+    With sub-error "Not allowed to access MXMF, CSP Manager is not ready"
+    The EMDK takes a minute or so from boot to it is ready, so if we try to access device serial too early it will fail
+    Will resolve itself once EMDK is ready
+
+    Or:
     Due to CallerSignature not matching signature of app.
     To get signature of app, you can use Zebras own Sigtools.jar and convert the result to base64 instructions found here: https://techdocs.zebra.com/emdk-for-android/latest/samples/sigtools/
 
