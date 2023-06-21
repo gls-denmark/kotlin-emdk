@@ -63,9 +63,10 @@ dependencies {
     This project will not build if the desired version does not exist in repository
     Therefore we can start building with direct reference to the project
     Once build and published, we can test the uploaded library by referring to the repository instead
+    See https://jitpack.io/#gls-denmark/kotlin-emdk for available versions
      */
 
-//    def emdk_version = "1.0.1"
+//    def emdk_version = "x.y.z"
 //    implementation "com.github.gls-denmark:kotlin-emdk:$emdk_version"
     implementation project(':kemdk')
 
