@@ -37,7 +37,7 @@ class EMDKViewModel() : ViewModel() {
 
                         is EMDKThrowable.ProfileXMLThrowable -> {
                             val error = result.error as EMDKThrowable.ProfileXMLThrowable
-                            _deviceResultStateFlow.update { UIState.Error(error.emdkResult?.extendedStatusMessage) }
+                            _deviceResultStateFlow.update { UIState.Error(error.emdkConfigError?.extendedConfigError) }
                         }
 
                         is EMDKThrowable.UnableToRetrieveSerial -> {

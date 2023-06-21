@@ -19,9 +19,10 @@ To get the kemdk library you also need to add a reference to jitpak:
 
 #### app build.gradle
 In the dependencies of your app you need to reference the implementation of the kemdk library
+You can see the available versions at https://jitpack.io/#gls-denmark/kotlin-emdk
 ```
 /* EMDK */
-val emdkVersion = "1.0.0"
+val emdkVersion = "1.0.1" 
 implementation("com.github.gls-denmark:kotlin-emdk:$emdkVersion")
 ```
 
@@ -132,7 +133,13 @@ YWR2ZW50dXJlZmF0aGVycm9vdHBhc3R0cmFjZWVhY2hydWJiZXJoYWRldmVudGNoZWNrdGVhY2hlcmV4
     There are several cases where this error can occur, see below
   
   - *statusCode CHECK_XML*
-  
+
+    Either:
+    With sub-error "Not allowed to access MXMF, CSP Manager is not ready"
+    The EMDK takes a minute or so from boot to it is ready, so if we try to access device serial too early it will fail
+    Will resolve itself once EMDK is ready
+
+    Or:
     Due to CallerSignature not matching signature of app.
     To get signature of app, you can use Zebras own Sigtools.jar and convert the result to base64 instructions found here: https://techdocs.zebra.com/emdk-for-android/latest/samples/sigtools/
 

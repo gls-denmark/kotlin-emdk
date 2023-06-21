@@ -11,8 +11,6 @@ plugins {
     id 'maven-publish'
 }
 
-version = "0.0.1"
-
 android {
     namespace 'dk.gls.kemdk'
     compileSdk 33
