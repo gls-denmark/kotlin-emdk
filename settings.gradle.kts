@@ -11,11 +11,9 @@ dependencyResolutionManagement {
         mavenLocal()
         google()
         mavenCentral()
-        maven {
-            url = "https://zebratech.jfrog.io/artifactory/EMDK-Android/"
-        }
+        maven("https://zebratech.jfrog.io/artifactory/EMDK-Android/")
     }
 }
 rootProject.name = "kotlin-emdk"
-include ':app'
-include ':kemdk'
+include(":app")
+include(":kemdk")
