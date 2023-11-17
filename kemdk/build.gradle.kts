@@ -6,7 +6,7 @@ plugins {
 
 val libraryGroupId = "dk.gls"
 val libraryArtifactId = "kotlin-emdk"
-val libraryVersion = "1.0.1"
+val libraryVersion = "1.0.2"
 
 android {
     namespace = "dk.gls.kemdk"
