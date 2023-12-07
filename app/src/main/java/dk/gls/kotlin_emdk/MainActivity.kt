@@ -3,6 +3,7 @@ package dk.gls.kotlin_emdk
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -13,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dk.gls.kotlin_emdk.ui.theme.KotlinemdkTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dk.gls.kotlin_emdk.ui.theme.KotlinemdkTheme
 
 
 class MainActivity : ComponentActivity() {
@@ -38,32 +39,44 @@ class MainActivity : ComponentActivity() {
 fun DisplayDeviceSerial(modifier: Modifier = Modifier) {
     val viewModel: EMDKViewModel = viewModel()
 
-    val serialResult = viewModel.deviceSerialStateFlow.collectAsStateWithLifecycle()
+    val serialResult = viewModel.uiState.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
 
-    if (serialResult.value is UIState.Init) {
-        LaunchedEffect(Unit) {
-            viewModel.getDeviceSerial(context)
-        }
+    LaunchedEffect(Unit) {
+
+        viewModel.configure(context)
     }
 
-    Text(
-        text = getText(serialResult.value),
-        modifier = modifier
-    )
+    LaunchedEffect(Unit) {
+        viewModel.getDeviceSerial()
+    }
+
+    Column {
+        Text(
+            text = getText("Configuration", serialResult.value.configure),
+            modifier = modifier
+        )
+
+        Text(
+            text = getText("OEMInfo", serialResult.value.oemInfoInfoUIState),
+            modifier = modifier
+        )
+    }
 }
 
-private fun getText(value: UIState): String{
-    return when(value){
-        is UIState.Error -> {
-            "An Error occurred when getting device serial:\n${(value as UIState.Error).errorMessage}!"
+private fun getText(type: String, value: InfoUIState): String {
+    return when (value) {
+        is InfoUIState.Error -> {
+            "$type \n Error occurred: ${value.errorMessage}"
         }
-        is UIState.Success -> {
-            "Device Serial:\n${(value as UIState.Success).serialValue}!"
+
+        is InfoUIState.Success -> {
+            "$type \n Result: ${value.serialValue}"
         }
-        is UIState.Init -> {
-            "Getting Device Serial"
+
+        is InfoUIState.Init -> {
+            "$type \n Loading"
         }
     }
 }

@@ -27,6 +27,6 @@
      *;
 }
 
--keep class dk.gls.kemdk.EMDKThrowable.** {
+-keep class dk.gls.kemdk.emdk.EMDKThrowable.** {
      *;
 }
