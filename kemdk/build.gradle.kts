@@ -38,12 +38,25 @@ kotlin {
 }
 
 dependencies {
-
-    //Scanner
-    val emdk_version = "9.1.1"
-    compileOnly("com.symbol:emdk:$emdk_version")
-
+    /* android */
     implementation("androidx.appcompat:appcompat:1.6.1")
+
+    /* emdk */
+    val emdkVersion = "9.1.1"
+    compileOnly("com.symbol:emdk:$emdkVersion")
+
+
+    /* coroutines */
+    val coroutinesVersion = "1.7.2"
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+
+    /* junit */
+    testImplementation("junit:junit:4.13.2")
+
+    /* mockk */
+    val mockkVersion = "1.13.8"
+    testImplementation("io.mockk:mockk-android:$mockkVersion")
+    testImplementation("io.mockk:mockk-agent:$mockkVersion")
 }
 
 publishing {
