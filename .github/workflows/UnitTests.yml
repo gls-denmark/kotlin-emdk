@@ -6,16 +6,17 @@ on:
 
 jobs:
   tests:
-    runs-on:
-      group: Trifork-Android-Frontend-Group
+    runs-on: ubuntu-latest
     steps:
-      # Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
-      # Execute unit tests
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
       - name: Unit Test
         run: ./gradlew test
-      # Upload unit test results
       - name: Unit tests results
         uses: dorny/test-reporter@v1
         if: always()
