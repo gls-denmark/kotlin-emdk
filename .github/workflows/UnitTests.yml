@@ -1,0 +1,26 @@
+name: Unit tests
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  tests:
+    runs-on:
+      group: Trifork-Android-Frontend-Group
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+      # Execute unit tests
+      - name: Unit Test
+        run: ./gradlew test
+      # Upload unit test results
+      - name: Unit tests results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Unit test reports
+          path: kemdk/build/test-results/*/*.xml
+          reporter: java-junit
+          fail-on-error: true
