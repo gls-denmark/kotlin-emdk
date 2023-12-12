@@ -31,6 +31,12 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 kotlin {
@@ -47,7 +53,7 @@ dependencies {
 
 
     /* coroutines */
-    val coroutinesVersion = "1.7.2"
+    val coroutinesVersion = "1.7.3"
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
 
     /* junit */
