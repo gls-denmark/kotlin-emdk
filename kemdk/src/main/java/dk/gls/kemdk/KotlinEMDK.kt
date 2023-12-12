@@ -10,6 +10,7 @@ import dk.gls.kemdk.model.RetryConfiguration
 import dk.gls.kemdk.oemInfo.OEMInfoRequester
 import dk.gls.kemdk.oemInfo.OEMInfoThrowable
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 open class KotlinEMDK : IKotlinEMDK {
 
@@ -30,8 +31,13 @@ open class KotlinEMDK : IKotlinEMDK {
         return _deviceInformation.configure()
     }
 
-    override fun retrieveOEMInfo(oemInfo: OEMInfo): Flow<EMDKResult<String, OEMInfoThrowable>> {
-        return _deviceInformation.retrieveOEMInfo(oemInfo)
+    override fun retrieveOEMInfo(oemInfo: OEMInfo): Flow<EMDKResult<String, EMDKThrowable.UnableToRetrieveOEMInfo>> {
+        return _deviceInformation.retrieveOEMInfo(oemInfo).map { result ->
+            return@map when(result) {
+                is EMDKResult.Failure -> EMDKThrowable.UnableToRetrieveOEMInfo(result.error).toKEMDKFailure()
+                is EMDKResult.Success -> result
+            }
+        }
     }
 }
 

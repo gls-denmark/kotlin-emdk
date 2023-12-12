@@ -33,5 +33,5 @@ interface IKotlinEMDK {
      * Retries the specified amounts in the setup function [RetryConfiguration] parameter
      * Be aware that the device should either be configured using Stage Now or above [configure] function at least once before it is possible to retrieve the any [OEMInfo]
     **/
-    fun retrieveOEMInfo(oemInfo: OEMInfo): Flow<EMDKResult<String, OEMInfoThrowable>>
+    fun retrieveOEMInfo(oemInfo: OEMInfo): Flow<EMDKResult<String, EMDKThrowable.UnableToRetrieveOEMInfo>>
 }

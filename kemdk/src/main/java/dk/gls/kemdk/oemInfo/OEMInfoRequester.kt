@@ -20,19 +20,20 @@ class OEMInfoRequester(
      * @link https://developer.android.com/guide/topics/providers/content-provider-basics.html for more information
      **/
     override fun retrieveOEMInfo(oemInfo: OEMInfo): EMDKResult<String, OEMInfoThrowable> {
+        val oemInfoLogString = "OEMInfo: ${oemInfo.getApiUri()} "
         val uri = oemInfo.getApiUri()
         val cursor = context.contentResolver.query(uri, null, null, null, null)
 
         try {
             if (cursor == null || cursor.count < 1) {
-                val errorMsg = "The app does not have access to call OEM service. Please assign access to $uri through MX"
+                val errorMsg = oemInfoLogString + "The app does not have access to call OEM service. Please assign access to $uri through MX"
                 Log.e(TAG, errorMsg)
                 return OEMInfoThrowable.CursorNotAvailable(errorMsg).toKEMDKFailure()
             }
 
             while (cursor.moveToNext()) {
                 if (cursor.columnCount == 0) {
-                    val errorMsg = "No data in the cursor. Can happen on non-WAN devices. $uri does not exist on this device"
+                    val errorMsg = oemInfoLogString + "No data in the cursor. Can happen on non-WAN devices. $uri does not exist on this device"
                     Log.d(TAG, errorMsg)
                     return OEMInfoThrowable.CursorEmpty(errorMsg).toKEMDKFailure()
                 } else {
@@ -40,7 +41,7 @@ class OEMInfoRequester(
                         val columnIndex = cursor.getColumnIndex(cursor.getColumnName(i))
                         val data = cursor.getString(columnIndex)
 
-                        Log.d(TAG, "Column $i=${cursor.getColumnName(i)}; Data $i=$data")
+                        Log.d(TAG, oemInfoLogString + "Column $i=${cursor.getColumnName(i)}; Data $i=$data")
                         return if(data.isNotBlank()) {
                             data.toKEMDKSuccess()
                         } else {
@@ -50,7 +51,7 @@ class OEMInfoRequester(
                 }
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Exception reading data for column")
+            Log.e(TAG, oemInfoLogString + "Exception reading data for column")
             return OEMInfoThrowable.ExceptionReadingData(e).toKEMDKFailure()
         } finally {
             cursor?.close()

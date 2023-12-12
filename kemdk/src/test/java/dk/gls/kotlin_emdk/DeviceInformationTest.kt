@@ -26,7 +26,7 @@ import org.junit.Test
 class DeviceInformationTest {
 
     @Test
-    fun `configure is correctly retired after first attempt to retrieve fails`() = runTest {
+    fun `configure is correctly retried after first attempt to retrieve fails`() = runTest {
         //Arrange
         val emdkIntegration = mockk<EMDKIntegration>(relaxed = true) {
             coEvery {
