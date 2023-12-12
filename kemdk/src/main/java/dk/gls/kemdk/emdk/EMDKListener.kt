@@ -5,6 +5,7 @@ import android.util.Log
 import com.symbol.emdk.EMDKManager
 import com.symbol.emdk.EMDKResults
 import com.symbol.emdk.ProfileManager
+import dk.gls.kemdk.model.EMDKStatusCode
 import dk.gls.kemdk.model.toEMDKConfigResult
 
 class EMDKListener(
@@ -50,22 +51,24 @@ class EMDKListener(
 
     override fun onClosed() {
         Log.d(TAG, "onClosed")
+        emdkListener.onCompleted()
     }
 
     override fun onData(resultData: ProfileManager.ResultData?) {
-        val result = resultData?.result
-        if (result?.statusCode == EMDKResults.STATUS_CODE.CHECK_XML) {
-            Log.d(TAG, "statusCode ${EMDKResults.STATUS_CODE.CHECK_XML}, responseXml ${result.statusString}")
+        val result = resultData?.result?.toEMDKConfigResult() ?: return
+
+        Log.d(TAG, "onData: statusCode ${result.statusCode.name}, statusString ${result.statusString}, extendedStatusMessage ${result.extendedStatusMessage}")
+
+        if (result.statusCode == EMDKStatusCode.CHECK_XML) {
             emdkListener.onCompleted()
-        } else if (result?.statusCode != EMDKResults.STATUS_CODE.SUCCESS) {
-            Log.d(TAG, "Error occurred while applying profile: statusCode: ${result?.statusCode} extendedStatusMessage ${result?.extendedStatusMessage}")
+        } else if (result.statusCode == EMDKStatusCode.SUCCESS) {
             emdkListener.onError(
-                EMDKThrowable.ProfileXMLThrowable(result?.toEMDKConfigResult())
+                EMDKThrowable.ProfileXMLThrowable(result)
             )
         }
     }
 
     companion object {
-        const val TAG = "EMDKIntegration"
+        const val TAG = "EMDKListener"
     }
 }
