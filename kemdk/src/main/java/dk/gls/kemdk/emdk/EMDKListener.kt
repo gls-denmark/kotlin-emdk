@@ -61,7 +61,7 @@ class EMDKListener(
 
         if (result.statusCode == EMDKStatusCode.CHECK_XML) {
             emdkListener.onCompleted()
-        } else if (result.statusCode == EMDKStatusCode.SUCCESS) {
+        } else if (result.statusCode != EMDKStatusCode.SUCCESS) {
             emdkListener.onError(
                 EMDKThrowable.ProfileXMLThrowable(result)
             )
