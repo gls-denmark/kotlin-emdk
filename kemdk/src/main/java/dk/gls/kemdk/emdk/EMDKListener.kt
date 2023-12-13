@@ -59,15 +59,12 @@ class EMDKListener(
 
         Log.d(TAG, "onData: statusCode ${result.statusCode.name}, statusString ${result.statusString}, extendedStatusMessage ${result.extendedStatusMessage}")
 
-        if (result.statusCode == EMDKStatusCode.CHECK_XML) {
+        if (result.statusCode == EMDKStatusCode.SUCCESS || result.statusCode == EMDKStatusCode.CHECK_XML) {
             emdkListener.onCompleted()
-        } else if (result.statusCode != EMDKStatusCode.SUCCESS) {
+        } else {
             emdkListener.onError(
-                EMDKThrowable.ProfileXMLThrowable(result)
+                EMDKThrowable.ProfileThrowable(result)
             )
-        }
-        else {
-            emdkListener.onCompleted()
         }
     }
 

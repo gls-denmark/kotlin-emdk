@@ -11,10 +11,11 @@ sealed class EMDKThrowable(override val cause: Throwable?) : Throwable() {
     class ProfileLoadThrowable(cause: Throwable) : EMDKThrowable(cause)
 
     /**
-     * ProfileXMLThrowable is related to errors in the EDMKConfig.xml
+     * ProfileThrowable is related to errors when applying the configuration
      * See Readme for troubleshooting
+     * @link https://techdocs.zebra.com/emdk-for-android/6-3/guide/xmlresponseguide/
      */
-    class ProfileXMLThrowable(val emdkConfigResult: EMDKConfigResult?) : EMDKThrowable(IllegalStateException("Configure the XML profile accordingly to which data you want to retrieve"))
+    class ProfileThrowable(val emdkConfigResult: EMDKConfigResult?) : EMDKThrowable(IllegalStateException("Configure the XML profile accordingly to which data you want to retrieve"))
 
     /**
      * UnableToRetrieveSerial happens when there is an error retrieving the device serial
