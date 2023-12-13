@@ -66,6 +66,9 @@ class EMDKListener(
                 EMDKThrowable.ProfileXMLThrowable(result)
             )
         }
+        else {
+            emdkListener.onCompleted()
+        }
     }
 
     companion object {
