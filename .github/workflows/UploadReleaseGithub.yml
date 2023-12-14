@@ -6,14 +6,18 @@ on:
       - release.**
 
 jobs:
-  build:
+  upload:
     environment: build
     env:
       GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
       GIT_AUTH_TOKEN: ${{ secrets.GIT_AUTH_TOKEN }}
-    runs-on:
-      group: Trifork-Android-Frontend-Group
+    runs-on: ubuntu-latest
     steps:
-    # Upload aar file to github repo
-      - name: Upload release github
+      - uses: actions/checkout@v1
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: "temurin"
+          java-version: 17
+      - name: Upload
         run: ./gradlew publish
