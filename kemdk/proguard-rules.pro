@@ -19,14 +19,22 @@
      *;
 }
 
--keep class dk.gls.kemdk.DeviceSerialUtil.** {
+-keep class dk.gls.kemdk.IKotlinEMDK.** {
      *;
+}
+
+-keep class dk.gls.kemdk.model.** {
+    *;
 }
 
 -keep class dk.gls.kemdk.EMDKResult.** {
      *;
 }
 
--keep class dk.gls.kemdk.EMDKThrowable.** {
+-keep class dk.gls.kemdk.emdk.EMDKThrowable.** {
+     *;
+}
+
+-keep class dk.gls.kemdk.model.OEMInfo** {
      *;
 }
