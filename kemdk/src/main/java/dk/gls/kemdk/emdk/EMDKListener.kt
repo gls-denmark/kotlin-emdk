@@ -51,7 +51,6 @@ class EMDKListener(
 
     override fun onClosed() {
         Log.d(TAG, "onClosed")
-        emdkListener.onCompleted()
     }
 
     override fun onData(resultData: ProfileManager.ResultData?) {
